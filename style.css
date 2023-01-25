@@ -1,0 +1,15 @@
+h1 {
+    color: rgb(43, 119, 226);
+    text-align: center;
+  }
+
+  table {
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+  }
+
+  table, th, td {
+    border: 1px solid;
+  }
