@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json`)
         .then(response => response.json())
         .then(response => {
+            
             let data = response
-                
-                let smallData = data.slice(0, 100)
-                console.log(smallData)
-                smallData.map(handleTable)
-
+            let smallData = data.slice(0, 100)
+            
+            smallData.map(handleTable)
          
         })
     })
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //form.addEventListener("submit", (event) => {
 // event.preventDefault()
     // console.log("event", event)
-    //https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
+
 
 
 
@@ -43,18 +42,43 @@ document.addEventListener("DOMContentLoaded", () => {
         const cellName = document.createElement("td")
         cellName.innerText = object["representative"]
         row.appendChild(cellName)
+        table.appendChild(row)
 
+        const cellState = document.createElement("td")
+        cellState.innerText = object["state"]
+        row.appendChild(cellState)
+        table.appendChild(row)
 
+        const cellParty = document.createElement("td")
+        cellParty.innerText = object["party"]
+        row.appendChild(cellParty)
+        table.appendChild(row)
 
+        const cellTransaction = document.createElement("td")
+        cellTransaction.innerText = object["transaction_date"]
+        row.appendChild(cellTransaction)
+        table.appendChild(row)
 
-        // for (const key in object) {
-            
-        //     const cell = document.createElement("td")
-        //     
-        //     
-        //     row.appendChild(cell)
-    // }
- table.appendChild(row)
+        const cellType = document.createElement("td")
+        cellType.innerText = object["ticker"]
+        row.appendChild(cellType)
+        table.appendChild(row)
+
+        const cellSP = document.createElement("td")
+        cellSP.innerText = object["type"]
+        row.appendChild(cellSP)
+        table.appendChild(row)
+
+        const cellCapGain = document.createElement("td")
+        cellCapGain.innerText = object["cap_gains_over_200_usd"]
+        row.appendChild(cellCapGain)
+        table.appendChild(row)
+
+        const cellLink = document.createElement("td")
+        cellLink.innerText = object["ptr_link"]
+        row.appendChild(cellLink)
+        table.appendChild(row)
+
 }
 // get form for submit event
   //  const table = document.getElementById("table")
