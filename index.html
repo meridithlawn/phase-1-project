@@ -1,8 +1,57 @@
 <!DOCTYPE html>
 
 <html>
-    <head> US House of Congress Investment Transactions Record</head>
+
+    <head> 
+        <h1>US House of Congress Investment Transactions</h1>
+        <script src="main.js"></script> 
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+
     <body>
+        <div id='main'>
+
+            <h2>Search</h2>
         
+            <form id='search-form'>
+              <input id='search' type='text' name='search'>
+              <input type='submit' name='submit'/>
+            </form>
+        
+            <div id='search-container'>
+              <ul id='search-results-list'>
+        
+              </ul>
+        
+              <ul id='search-list'>
+        
+              </ul>
+            </div>
+        
+          </div> 
     </body>
+
+    <table id = "table">
+        <tr class = "table-headers">
+          <th id = "name">Name</th>
+          <th id = "state">State</th>
+          <th id = "party">Party </th>
+          <th id = "transaction">Transaction Date</th>
+          <th id = "type">Type</th>
+          <th id = "sale-or-purchase">Sale or Purchase</th>
+          <th id = "capital-gains">Capital Gains over $200 USD?</th>
+          <th id = "link">Documentation Link</th>
+        </tr>
+        <tr class = "table rows">
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+          <td>F</td>
+          <td>G</td>
+          <td>H</td>
+        </tr>
+      </table>
 </html>
