@@ -1,6 +1,7 @@
 
 
-
+let congressData = []
+let smallData = []
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,22 +9,57 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json`)
         .then(response => response.json())
         .then(response => {
+            congressData = response
             
-            let data = response
-            let smallData = data.slice(0, 100)
+            smallData = congressData.slice(0, 200)
             
             smallData.map(handleTable)
-         
+
+        // congressData.forEach(handleTable)
         })
-    })
 
-        //data.objects.map(({representative, state, party, transaction_date, ticker, type, cap_gains_over_200_usd, ptr_link}) => {
+        // const form = document.getElementById('search-form')
+        // form.addEventListener("submit", (event) => {
+        // event.preventDefault()
+        //     console.log("event", event)
+        // let searchedWord = event.target[0].value
+        //     console.log("searched word", searchedWord)
 
+        const selectParty = document.getElementById("search-by-party")
+            
 
-// to get the actual word that was searched? and maybe interpolation for the fetch?
-// fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json=${searchedWord}`)
-//  let searchedWord = event.target.value
-// console.log(searchedWord)
+        selectParty.addEventListener("change", (e)=> {
+            let newRows = document.querySelectorAll(".new-row")
+                newRows.forEach(deleteRows)
+
+            function deleteRows(newRows) {
+                return newRows.innerHTML = ""
+            }
+
+            // empty out previous table here
+            const selectedParty = e.target.value
+                // console.log(selectedParty)
+                // console.log(selectParty.value)
+               
+        // try filter function instead of iterating
+        // get the data which has the party and then console log to see if you get the correct objects
+            for (const object of smallData) {
+                if (object["party"] === selectedParty) {
+                    console.log(object)
+                    handleTable(object)
+                // } else {
+                //    if (selectedParty === "all") {
+                    // smallData.map(handleTable)
+                    //}
+                }
+            }
+
+               
+        })
+        
+
+        
+        })
 
 
 //
@@ -37,7 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleTable(object) {
         const row = document.createElement("tr")
+        row.className = "new-row"
         const table = document.getElementById("table")
+
+        // const button = document.createElement("td")
+        // button.innerHTML = document.createElement("btn")
 
         const cellName = document.createElement("td")
         cellName.innerText = object["representative"]
@@ -74,14 +114,26 @@ document.addEventListener("DOMContentLoaded", () => {
         row.appendChild(cellCapGain)
         table.appendChild(row)
 
-        const cellLink = document.createElement("td")
+        let cellLink = document.createElement("td")
+        // makeClick(cellLink)
         cellLink.innerText = object["ptr_link"]
         row.appendChild(cellLink)
         table.appendChild(row)
+    
 
-}
+    }
+   
+
+    // function makeClick(cellLink) {
+    //     const link = document.createElement('a');
+    //     link.href = object["ptr_link"];
+    //     link.innerHTML = object["ptr_link"];
+    //     cellLink.innerHTML = link
+    //     return cellLink;
+    // }
+    
 // get form for submit event
-  //  const table = document.getElementById("table")
+  //const table = document.getElementById("table")
     //const form = document.getElementById('search-form')
     //form.addEventListener("submit", (event) => {
     //event.preventDefault()
@@ -89,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //let searchedWord = event.target[0].value
         //console.log("searched word", searchedWord)
 
-        //create for loops for each key that I want to go into the table
+// document.querySelectorAll(".new-row")
 
- 
+// loop through this node list and delete
+
