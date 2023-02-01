@@ -116,22 +116,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let cellLink = document.createElement("td")
         // makeClick(cellLink)
-        cellLink.innerText = object["ptr_link"]
+        // cellLink.innerText = anchor?
+        let anchor = document.createElement('a');
+        anchor.innerText = "click";
+        anchor.href = object["ptr_link"]
+        anchor.target = "_blank"
+        cellLink.appendChild(anchor)
         row.appendChild(cellLink)
         table.appendChild(row)
     
 
     }
-   
-
-    // function makeClick(cellLink) {
-    //     const link = document.createElement('a');
-    //     link.href = object["ptr_link"];
-    //     link.innerHTML = object["ptr_link"];
-    //     cellLink.innerHTML = link
-    //     return cellLink;
+    // function createLink() {
+    //     let anchor = document.createElement('a');
+    //     let link = document.createTextNode("Linuxhint Website");
+    //     anchor.appendChild(link);
+    //     anchor.href = "https://linuxhint.com/";
+    //     document.body.appendChild(anchor);
     // }
-    
+
+    // function makeClick() {
+    //     let anchor = document.createElement('a');
+    //     let link = document.createTextNode("click");
+    //     anchor.appendChild(link)
+    //     anchor.href = object["ptr_link"]
+    //     return anchor;
+    // }
+
 // get form for submit event
   //const table = document.getElementById("table")
     //const form = document.getElementById('search-form')
