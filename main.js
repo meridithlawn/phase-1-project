@@ -18,12 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // congressData.forEach(handleTable)
         })
 
-        // const form = document.getElementById('search-form')
-        // form.addEventListener("submit", (event) => {
-        // event.preventDefault()
-        //     console.log("event", event)
-        // let searchedWord = event.target[0].value
-        //     console.log("searched word", searchedWord)
+        const form = document.getElementById('search-form')
+        form.addEventListener("submit", (event) => {
+        event.preventDefault()
+            console.log("event", event)
+        let searchedWord = event.target[0].value
+            console.log("searched word", searchedWord)
+
+
+
+            
 
         const selectParty = document.getElementById("search-by-party")
             
@@ -36,13 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return newRows.innerHTML = ""
             }
 
-            // empty out previous table here
             const selectedParty = e.target.value
                 // console.log(selectedParty)
                 // console.log(selectParty.value)
-               
-        // try filter function instead of iterating
-        // get the data which has the party and then console log to see if you get the correct objects
             for (const object of smallData) {
                 if (object["party"] === selectedParty) {
                     console.log(object)
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         })
-
+    })
 
 //
 //const form = document.getElementById('search-form')
@@ -155,4 +155,3 @@ document.addEventListener("DOMContentLoaded", () => {
 // document.querySelectorAll(".new-row")
 
 // loop through this node list and delete
-
