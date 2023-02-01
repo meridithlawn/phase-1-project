@@ -12,11 +12,20 @@
     <body>
         <div id='main'>
 
-            <h2>Search</h2>
+            <h2>Search by Name</h2>
         
             <form id='search-form'>
               <input id='search' type='text' name='search'>
               <input type='submit' name='submit'/>
+            </form>
+            <form id = "search-party">
+                <label for="party">Choose a party:</label>
+                <select name="select-party" id="search-by-party">
+                    <option value="Republican">Republican</option>
+                    <option value="Democrat">Democrat</option>
+                    <option value="Libertarian">Libertarian</option>
+                    <option value ="all">all</option>
+                </select>
             </form>
         
             <div id='search-container'>
