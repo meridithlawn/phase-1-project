@@ -1,66 +1,174 @@
 
 
+let congressData = []
+let smallData = []
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
     fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json`)
         .then(response => response.json())
         .then(response => {
-            let data = response
+            congressData = response
             
-            // try for loop to iterate through arraay: for (let i = 0; i < data.length; i++) {}
-                // console.log("data", data)
-                
-                // console.log("data[0].representative", data[0].representative)
-                
-                let smallData = data.slice(0, 100)
-                console.log(smallData)
-                smallData.map(handleTable)
+            smallData = congressData.slice(0, 200)
+            
+            smallData.map(handleTable)
 
-         
+        // congressData.forEach(handleTable)
         })
+
+        const form = document.getElementById('search-form')
+        form.addEventListener("submit", (event) => {
+        event.preventDefault()
+        let newRows = document.querySelectorAll(".new-row")
+                newRows.forEach(deleteRows)
+
+            function deleteRows(newRows) {
+                return newRows.innerHTML = ""
+            }
+           console.log("event", event)
+        let searchedWord = event.target[0].value
+           // console.log("searched word", searchedWord)
+           searchedWord = searchedWord.toLowerCase()
+           
+           
+        //    function filterNames (obj) {
+        //     let representative = obj.representative.toLowerCase()
+        //     if (representative.includes(searchedWord)) {
+        //         handleTable(obj)
+        //         return true
+        //     }
+            
+                  
+        // }
+            console.log(searchedWord)
+            const searchResults = smallData.filter(obj => obj.representative.toLowerCase().includes(searchedWord))
+            searchResults.forEach(handleTable)
+
+        })
+      
+
+
+
+
+
+        const selectParty = document.getElementById("search-by-party")
+            
+
+        selectParty.addEventListener("change", (e)=> {
+            let newRows = document.querySelectorAll(".new-row")
+                newRows.forEach(deleteRows)
+
+            function deleteRows(newRows) {
+                return newRows.innerHTML = ""
+            }
+
+            const selectedParty = e.target.value
+                // console.log(selectedParty)
+                // console.log(selectParty.value)
+            for (const object of smallData) {
+                if (object["party"] === selectedParty) {
+                    console.log(object)
+                    handleTable(object)
+                // } else {
+                //    if (selectedParty === "all") {
+                    // smallData.map(handleTable)
+                    //}
+                }
+            }
+
+               
+        })
+        
+
+        
+        
     })
-
-        //data.objects.map(({representative, state, party, transaction_date, ticker, type, cap_gains_over_200_usd, ptr_link}) => {
-
-
-// to get the actual word that was searched? and maybe interpolation for the fetch?
-// fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json=${searchedWord}`)
-//  let searchedWord = event.target.value
-// console.log(searchedWord)
-
 
 //
 //const form = document.getElementById('search-form')
 //form.addEventListener("submit", (event) => {
 // event.preventDefault()
     // console.log("event", event)
-    //https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
+
 
 
 
     function handleTable(object) {
         const row = document.createElement("tr")
+        row.className = "new-row"
         const table = document.getElementById("table")
+
+        // const button = document.createElement("td")
+        // button.innerHTML = document.createElement("btn")
 
         const cellName = document.createElement("td")
         cellName.innerText = object["representative"]
         row.appendChild(cellName)
+        table.appendChild(row)
 
+        const cellState = document.createElement("td")
+        cellState.innerText = object["state"]
+        row.appendChild(cellState)
+        table.appendChild(row)
 
+        const cellParty = document.createElement("td")
+        cellParty.innerText = object["party"]
+        row.appendChild(cellParty)
+        table.appendChild(row)
 
+        const cellTransaction = document.createElement("td")
+        cellTransaction.innerText = object["transaction_date"]
+        row.appendChild(cellTransaction)
+        table.appendChild(row)
 
-        // for (const key in object) {
-            
-        //     const cell = document.createElement("td")
-        //     
-        //     
-        //     row.appendChild(cell)
+        const cellType = document.createElement("td")
+        cellType.innerText = object["ticker"]
+        row.appendChild(cellType)
+        table.appendChild(row)
+
+        const cellSP = document.createElement("td")
+        cellSP.innerText = object["type"]
+        row.appendChild(cellSP)
+        table.appendChild(row)
+
+        const cellCapGain = document.createElement("td")
+        cellCapGain.innerText = object["cap_gains_over_200_usd"]
+        row.appendChild(cellCapGain)
+        table.appendChild(row)
+
+        let cellLink = document.createElement("td")
+        // makeClick(cellLink)
+        // cellLink.innerText = anchor?
+        let anchor = document.createElement('a');
+        anchor.innerText = "click";
+        anchor.href = object["ptr_link"]
+        anchor.target = "_blank"
+        cellLink.appendChild(anchor)
+        row.appendChild(cellLink)
+        table.appendChild(row)
+    
+
+    }
+    // function createLink() {
+    //     let anchor = document.createElement('a');
+    //     let link = document.createTextNode("Linuxhint Website");
+    //     anchor.appendChild(link);
+    //     anchor.href = "https://linuxhint.com/";
+    //     document.body.appendChild(anchor);
     // }
- table.appendChild(row)
-}
+
+    // function makeClick() {
+    //     let anchor = document.createElement('a');
+    //     let link = document.createTextNode("click");
+    //     anchor.appendChild(link)
+    //     anchor.href = object["ptr_link"]
+    //     return anchor;
+    // }
+
 // get form for submit event
-  //  const table = document.getElementById("table")
+  //const table = document.getElementById("table")
     //const form = document.getElementById('search-form')
     //form.addEventListener("submit", (event) => {
     //event.preventDefault()
@@ -68,35 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //let searchedWord = event.target[0].value
         //console.log("searched word", searchedWord)
 
-        //create for loops for each key that I want to go into the table
+// document.querySelectorAll(".new-row")
 
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     getData()
-        //   })
-          
-        //   function getData() {
-        //       fetch(`https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json`)
-        //           .then(response => response.json())
-        //           .then(data => {
-        //               const table = document.getElementById("table");
-                      
-        //               const smallData = data.slice(0, 100)
-        //               console.log(smallData)
-          
-        //               smallData.map(object => {
-        //                   let tr = document.createElement("tr");
-          
-        //                   const { representative, state, party, transaction_date, ticker, type, cap_gains_over_200_usd, ptr_link } = object;
-        //                   const dataToList = { name: representative, state: state, party: party, transactionDate: transaction_date, type: ticker, saleOrPurchase: type, capitalGainsOver200: cap_gains_over_200_usd, docLink: ptr_link }
-          
-        //                   for (const [key, value] of Object.entries(dataToList)) {
-        //                       console.log(key, value)
-        //                       let td = document.createElement("td")
-        //                       td.innerHTML = value
-        //                       tr.append(td)
-        //                   }
-        //                   table.append(tr)
-        //               })
-          
-        //        })
-        //   }
+// loop through this node list and delete
+
