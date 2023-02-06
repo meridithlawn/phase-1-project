@@ -37,3 +37,12 @@ House of Congress Stock Data
 
 
 9. The documentation column of the table contains a clickable link which will redirect to a new tab that displays the official document
+
+PROJECT REQUIREMENTS CHECKLIST
+This app includes the following requirements:
+
+- Accesses data using fetch from a public API
+- Entire app runs on a single page
+- Includes three distinct event listeners: DOMContentLoaded, submit, change
+- Includes three (at least one required) instances of array iteration: forEach, filter, and map
+
