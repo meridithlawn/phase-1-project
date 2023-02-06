@@ -21,17 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById('search-form')
         form.addEventListener("submit", (event) => {
         event.preventDefault()
-            console.log("event", event)
+        let newRows = document.querySelectorAll(".new-row")
+                newRows.forEach(deleteRows)
+
+            function deleteRows(newRows) {
+                return newRows.innerHTML = ""
+            }
+           console.log("event", event)
         let searchedWord = event.target[0].value
-            console.log("searched word", searchedWord)
+           // console.log("searched word", searchedWord)
+            searchedWord = searchedWord.toLowerCase()
+            // console.log(searchedWord)
+            const searchResults = smallData.filter(obj => obj.representative.toLowerCase().includes(searchedWord))
+            searchResults.forEach(handleTable)
 
-
-
-            
-
+        })
+      
         const selectParty = document.getElementById("search-by-party")
             
-
         selectParty.addEventListener("change", (e)=> {
             let newRows = document.querySelectorAll(".new-row")
                 newRows.forEach(deleteRows)
@@ -59,15 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
 
         
-        })
+        
     })
-
-//
-//const form = document.getElementById('search-form')
-//form.addEventListener("submit", (event) => {
-// event.preventDefault()
-    // console.log("event", event)
-
 
 
 
@@ -75,9 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = document.createElement("tr")
         row.className = "new-row"
         const table = document.getElementById("table")
-
-        // const button = document.createElement("td")
-        // button.innerHTML = document.createElement("btn")
 
         const cellName = document.createElement("td")
         cellName.innerText = object["representative"]
@@ -115,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         table.appendChild(row)
 
         let cellLink = document.createElement("td")
-        // makeClick(cellLink)
-        // cellLink.innerText = anchor?
+
         let anchor = document.createElement('a');
         anchor.innerText = "click";
         anchor.href = object["ptr_link"]
@@ -125,33 +121,5 @@ document.addEventListener("DOMContentLoaded", () => {
         row.appendChild(cellLink)
         table.appendChild(row)
     
-
     }
-    // function createLink() {
-    //     let anchor = document.createElement('a');
-    //     let link = document.createTextNode("Linuxhint Website");
-    //     anchor.appendChild(link);
-    //     anchor.href = "https://linuxhint.com/";
-    //     document.body.appendChild(anchor);
-    // }
-
-    // function makeClick() {
-    //     let anchor = document.createElement('a');
-    //     let link = document.createTextNode("click");
-    //     anchor.appendChild(link)
-    //     anchor.href = object["ptr_link"]
-    //     return anchor;
-    // }
-
-// get form for submit event
-  //const table = document.getElementById("table")
-    //const form = document.getElementById('search-form')
-    //form.addEventListener("submit", (event) => {
-    //event.preventDefault()
-      //  console.log("event", event)
-        //let searchedWord = event.target[0].value
-        //console.log("searched word", searchedWord)
-
-// document.querySelectorAll(".new-row")
-
-// loop through this node list and delete
+    
