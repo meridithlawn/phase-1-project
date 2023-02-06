@@ -1,11 +1,13 @@
 # phase-1-project
 House of Congress Stock Data
 
-1. Uses fetch to retrieve data from a no-auth API containing US Congress members' stock transaction histories "https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json"
+1. Uses fetch to retrieve data from a no-auth API containing US Congress members' investment transaction histories "https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json"
 
-2. Receives and array of objects containing the stock transaction history of each member of US congress
+2. Receives data in the form of an array of objects containing the investment transaction history of each member of US congress
 
-3. The objects contain the following key-value pairs: 
+3. Saves the data from the fetch into a global variable called congressData
+
+4. The objects contain the following key-value pairs: 
 {
  "disclosure_year": 2021, 
  "disclosure_date": "02/25/2021", 
@@ -25,13 +27,13 @@ House of Congress Stock Data
  "party": "Republican"   
 }
 
-4. Iterate through each object, extract the specified key-value pairs, structure into an HTML table
+5. Iterates through each object on congressData to extract the specified key-value pairs, and organize into an HTML table
 
-5. Data is structured into an HTML table which will display the name, state, political party, transaction type, transaction date, industry, asset description, amount, capital gains over 200 usd T/F, link to documentation
+6. Data is structured into an HTML table which will display the name, state, political party, transaction date, type of investment, sale or purchase, capital gains over 200 usd T/F, link to documentation
 
-6. The app will have a form to search (by name, state, or political party?)
+7. The app will have a form with a submit event to perform a case-insensitive search congressData by name of politician and display the filtered data in a table
 
-7. The app will have a filter function to see a filtered selection based upon a certain category
+8. The app will have a change event to render a selection of data based upon the selected political party from a dropdown menu
 
 
-three different event listeners: "submit", "click", maybe dom content loaded?
+9. The documentation column of the table contains a clickable link which will redirect to a new tab that displays the official document
